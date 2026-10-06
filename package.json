@@ -1,0 +1,76 @@
+{
+  "name": "harukan",
+  "productName": "하루칸",
+  "version": "1.0.0",
+  "description": "하루칸 — 바탕화면 캘린더 · 할 일 · 유튜브 작업 관리자",
+  "main": "src/main/main.js",
+  "author": "hopeful-squirrel",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "icons": "node scripts/make-icons.js",
+    "dist": "electron-builder --win nsis portable --x64",
+    "dist:dir": "electron-builder --win dir --x64"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3"
+  },
+  "dependencies": {
+    "@fontsource/gowun-batang": "^5.3.0",
+    "@fontsource/gowun-dodum": "^5.3.0"
+  },
+  "build": {
+    "appId": "com.harukan.app",
+    "productName": "하루칸",
+    "executableName": "Harukan",
+    "copyright": "© 2026 hopeful-squirrel",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json",
+      "node_modules/@fontsource/gowun-batang/*.css",
+      "node_modules/@fontsource/gowun-batang/files/*.woff2",
+      "node_modules/@fontsource/gowun-dodum/*.css",
+      "node_modules/@fontsource/gowun-dodum/files/*.woff2",
+      "!scripts/**"
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Harukan-${version}-${arch}-${target}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "하루칸",
+      "artifactName": "Harukan-Setup-${version}.${ext}",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "runAfterFinish": true
+    },
+    "portable": {
+      "artifactName": "Harukan-Portable-${version}.${ext}"
+    }
+  }
+}
